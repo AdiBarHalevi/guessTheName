@@ -2,7 +2,7 @@ import './App.css';
 import Home from './pages/Home';
 
 import { BrowserRouter , Route } from "react-router-dom";
-import GamePlayApi from './components/GamePlayApi';
+import GamePlayApi from './pages/game-play/GamePlayApi';
 
 function App() {
   document.title = 'guess the name'
