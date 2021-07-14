@@ -1,1 +1,2 @@
-export const getRandomArrayIndex =(length: number)=> Math.floor(Math.random() * (length)+1) ;
+export const getRandomArrayIndex = (length: number) =>
+  Math.floor(Math.random() * length + 1);
