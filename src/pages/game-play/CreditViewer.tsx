@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import CreditPoint from "../../img/life.png"
 
+// TODO CHECK FOR MORE ELEGANT SOLOUTION
 const turnToArray = (CreditPoint:number)=>{
     const creditCount = [];
     for(let v=0; v !== CreditPoint;v++){

@@ -5,9 +5,10 @@ import { useEffect, useState } from "react"
 
 
 const GamePlayApi =()=>{ 
-    const [apiData,setApiData] = useState([{}])
+    const [apiData,setApiData] = useState([{name:'',overview:''}])
 
-    const processToNames = (data:any) => data.map((item:any )=> item.name)
+    const processToNames = (data:{name:string}[]) => data.map((item:{name:string} )=>  item.name)
+    const processToHints = (data:{overview:string}[]) => data.map((item:{overview:string})=> item.overview)
     
 
     const fecthData = async ()=>{
@@ -30,9 +31,8 @@ const GamePlayApi =()=>{
         fecthData()
     },[])
 
-    if(apiData.length>1) return <Gameplay shows={processToNames(apiData)}/>
+    if(apiData.length>1) return <Gameplay shows={processToNames(apiData)} hints ={processToHints(apiData)}/>
     return <div>loading</div>
-    // return <Gameplay shows={['tomb raider', 'harry potter','I Am Not an Animal','The Promised Neverland','Mr. Queen']}/>
 
 }
 

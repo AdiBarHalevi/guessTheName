@@ -10,6 +10,7 @@ import Stats from "./game-play/Stats";
 import EndGameModal from "./EndGameModal";
 
 import styled from "styled-components";
+import HintViewer from "./game-play/HintViewer";
 
 enum actionEnum {
     CORRECT = 'correct',
@@ -17,14 +18,6 @@ enum actionEnum {
     HELP= 'help'
 
 }
-
-// TODO CHECK HOW TO IMPLEMENT THIS INTERFACE
-interface StatsData{
-        correct:number;
-        wrong:number;
-        help:number;
-}
-
 const showNameToLettersObject = (showName : string): Array<{letter: string, isVisible: boolean}> => {
     const showLetters = showName.split("")
     return showLetters.map(letter => { 
@@ -41,9 +34,12 @@ const changeStats =(stats:{correct:number,wrong:number,help:number},action:actio
     setStatsObj(tempStats)
     }
 
-const gernerateAword =(shows:Array<string>,setShowName:Function)=>{
-    const randomShow = shows[getRandomArrayIndex(shows.length - 1)]
-    setShowName(showNameToLettersObject(randomShow))
+const gernerateAword =(shows:Array<string>,hints:Array<string>,setShowName:Function,setRelatedHint:Function)=>{
+    const randomIndex =getRandomArrayIndex(shows.length - 1)
+    const chosenShow = shows[randomIndex]
+    const chosenHint = hints[randomIndex]
+    setShowName(showNameToLettersObject(chosenShow))
+    setRelatedHint(chosenHint)
 }
 
 const turnEnd = (setModelOpen:Function,setPlayerWinTurn:Function,playerWin:Boolean)=>{
@@ -51,28 +47,39 @@ const turnEnd = (setModelOpen:Function,setPlayerWinTurn:Function,playerWin:Boole
     setPlayerWinTurn(playerWin)
 }
 
-const resetGame=(setNewGame:Function,setModelOpen:Function)=>{
+const resetGame=(setNewGame:Function,setModalOpen:Function)=>{
     setNewGame(true)
-    // TODO CHANGE NAME TO MODAL
-    setModelOpen(false)
-
-
+    setModalOpen(false)
 }
 
 
-const Gameplay =({shows}: {shows: Array<string>})=>{
+const switchModalVisability = (setFunction:Function, modalState:boolean) => modalState?setFunction(false):setFunction(true)
+
+
+
+const Gameplay =({shows,hints}: {shows: Array<string>;hints: Array<string>})=>{
     const [showName, setShowName ] = useState<Array<{letter: string, isVisible: boolean}>>()
-    const [modelOpen,setModelOpen] = useState(false)
+    const [relatedHint,setRelatedHint] = useState('')
+    const [endGamemodalOpen,setEndGameModelOpen] = useState(false)
+    const [hintModalOpen,setHintModalOpen] = useState(false)
     const [playerWinTurn,setPlayerWinTurn] = useState(false)
     const [creditPoints,setCreditPoints] = useState<number>(3)
     const [statsObj,setStatsObj] = useState({correct:0,wrong:0,help:0})
     const [newGame, setNewGame] = useState(true)
 
     useEffect(()=>{
-        gernerateAword(shows,setShowName)
+        gernerateAword(shows,hints,setShowName,setRelatedHint)
         setNewGame(false)
 
-    },[newGame,shows])
+    },[newGame,shows,hints])
+
+    const onHintRequest = ()=>{
+        switchModalVisability(setHintModalOpen,hintModalOpen)
+        changeStats(statsObj,actionEnum.HELP,setStatsObj)
+        
+
+
+    }
 
     const onLetterGuess = (letter: string) => {
         const letterObjectMatches = showName ? showName.filter(letterObj => letterObj.letter === letter): []
@@ -85,13 +92,13 @@ const Gameplay =({shows}: {shows: Array<string>})=>{
 
             changeStats(statsObj,actionEnum.CORRECT,setStatsObj)
             const coveredLettersLeft = checkIfSolved(showNameWithGuess)
-            if(!coveredLettersLeft) turnEnd(setModelOpen,setPlayerWinTurn,true)
+            if(!coveredLettersLeft) turnEnd(setEndGameModelOpen,setPlayerWinTurn,true)
 
             setShowName(showNameWithGuess)
         }else{
             changeStats(statsObj,actionEnum.WRONG,setStatsObj)
             const deductedCredit = creditPoints-1
-            if(deductedCredit === 0)turnEnd(setModelOpen,setPlayerWinTurn,false)
+            if(deductedCredit === 0)turnEnd(setEndGameModelOpen,setPlayerWinTurn,false)
             return setCreditPoints(deductedCredit)
         }
     }
@@ -106,8 +113,14 @@ const Gameplay =({shows}: {shows: Array<string>})=>{
         <ScoreBoard>
                 <Timer/>
                 <Stats statsObj={statsObj}/>
-            </ScoreBoard>
-            <CreditViewer creditPoints={creditPoints}/>
+         </ScoreBoard>
+            <CreditAndHintsContainer>
+                <CreditViewer creditPoints={creditPoints}/>
+                <StyledButton onClick={onHintRequest}> Hint </StyledButton>
+            </CreditAndHintsContainer>
+            {hintModalOpen&&
+                <HintViewer relatedHint={relatedHint} handleClick={()=>switchModalVisability(setHintModalOpen,hintModalOpen)}/>
+            }
         </UpperContainer>
         <MainContent>
 
@@ -117,7 +130,7 @@ const Gameplay =({shows}: {shows: Array<string>})=>{
                     <UserLetterGuess onGuessSubmit={(letter: string) =>onLetterGuess(letter)} />
             </GameContainer>
         </MainContent>
-        {modelOpen&& <EndGameModal endGameStatus={playerWinTurn} resetGame={()=>resetGame(setNewGame,setModelOpen)}/> }
+        {endGamemodalOpen&& <EndGameModal endGameStatus={playerWinTurn} resetGame={()=>resetGame(setNewGame,setEndGameModelOpen)}/> }
     </StyledPage>
     )
 }
@@ -178,5 +191,21 @@ const StyledTitle = styled.p`
         margin-top:2rem;
         font-size:22px;
       }
+
+`
+const CreditAndHintsContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+    height: 58%;
+    width: 50%;
+
+`
+
+const StyledButton = styled.button`
+    background: transparent;
+    height: 20%;
+    width: 30%;
 
 `
