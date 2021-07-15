@@ -1,20 +1,18 @@
-import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Layout from "../components/Layout";
+import { MainSign, StyledDescription, StyledPage, StyledPageHeader } from "../commonComponents/StyledComponents";
 
 const Home = () => {
   return (
+
     <StyledPage>
       <MainSign>
-        <H2> Welcome to guess the TV game </H2>
-        <HomeMainContent>
-          <StyledLabel>click to start the game</StyledLabel>
-          <StyledLink to="/gameplay"> click here to play</StyledLink>
-        </HomeMainContent>
-        {/* <HomeMainContent>
-          <StyledLabel>click for insturctions</StyledLabel>
-          <StyledLink to="/gameplay"> click for insturctions</StyledLink>
-        </HomeMainContent> */}
+            <StyledPageHeader> Welcome to guess the TV game </StyledPageHeader>
+            <StyledDescription> 
+              <LineSpan>in order to start playing , click the <TVButtonSpan>Play</TVButtonSpan> button on the TV </LineSpan>
+              <LineSpan> if you need instructions , click the <TVButtonSpan>Instructions</TVButtonSpan>  button on the TV </LineSpan>
+              <LineSpan> if you want to go back to this page, you can always click the <TVButtonSpan> Home </TVButtonSpan>  button </LineSpan>
+            </StyledDescription>
+
       </MainSign>
     </StyledPage>
   );
@@ -22,56 +20,31 @@ const Home = () => {
 
 export default Home;
 
-// TODO IMPORT
-const StyledPage = styled.div`
-  height: 100%;
-  width: 100%;
-  background: blue;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  font-family: "Yomogi", cursive, Arial, Helvetica, sans-serif;
-`;
-const MainSign = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-const H2 = styled.h2`
-  font-size: 52px;
-  @media (max-width: 900px) {
-    font-size: 33px;
-  }
-`;
 
-const StyledLabel = styled.label`
-  font-size: 3rem;
-  @media (max-width: 800px) {
-    font-size: 30px;
-  }
-  @media (max-width: 900px) and (min-width: 800px) {
-    font-size: 2rem;
-  }
-`;
+const TVButtonSpan = styled.span`
+    text-decoration:none;
+    background:red;
+    color:white;
+    display:inline-block;
+    border:1px solid black;
+    padding:1px;
+    box-shadow:0px 0px 0px 2px rgba(0,0,0,0.51);
+    `
 
-const StyledLink = styled(Link)`
-  background: yellow;
-  font-size: 2rem;
-  margin-left: 2rem;
-  @media (max-width: 900px) {
-    font-size: 1.2rem;
-    margin-left:0rem;
-    margin-top:2rem;
-  }
-`;
+const LineSpan = styled.span`
+    display:block;
+    margin-top:20px;
+    @media (max-width: 900px) {
+      font-size: 33px;
+      display:inline-block;
+     
 
-const HomeMainContent = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  @media (max-width: 800px) {
-    flex-direction: column;
-    justify-content:center;
-    align-items:space-around;
-  }
-`;
+    }
+    @media (max-width: 600px) {
+      font-size: 16px;
+      margin-top:5px;
+      display:inline-block;
+     
+
+    }
+`

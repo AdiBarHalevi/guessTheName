@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FlexBox } from "../../commonComponents/StyledComponents";
 
 interface Props {
   statsObj: {
@@ -8,9 +9,10 @@ interface Props {
   };
 }
 
+
 const Stats: React.FC<Props> = ({ statsObj }) => {
   return (
-    <ScoreBoard>
+    <FlexBox flexDirection={'column'} width={'60%'} >
       <table>
         <tbody>
           <tr>
@@ -18,7 +20,7 @@ const Stats: React.FC<Props> = ({ statsObj }) => {
             <TableCell>{statsObj.correct}</TableCell>
           </tr>
           <tr>
-            <TableHader>worng guesses:</TableHader>
+            <TableHader>wrong guesses:</TableHader>
             <TableCell>{statsObj.wrong}</TableCell>
           </tr>
           <tr>
@@ -27,7 +29,7 @@ const Stats: React.FC<Props> = ({ statsObj }) => {
           </tr>
         </tbody>
       </table>
-    </ScoreBoard>
+    </FlexBox>
   );
 };
 
@@ -39,6 +41,7 @@ const TableHader = styled.th`
     font-size: 14px;
   }
 `;
+
 const TableCell = styled.td`
   font-size: 33px;
   
@@ -47,8 +50,3 @@ const TableCell = styled.td`
   }
 `;
 
-const ScoreBoard = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-`;

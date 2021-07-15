@@ -22,16 +22,6 @@ export enum ActionType {
     showName?: Array<{ letter: string; isVisible: boolean }>
   ) => showName?.find((letterObj) =>  letterObj.isVisible === false);
   
-  export const changeStats = (
-    stats: { correct: number; wrong: number; help: number },
-    action: ActionType,
-    setStatsObj: Function
-  ) => {
-    const tempStats = { ...stats };
-    tempStats[action] += 1;
-    setStatsObj(tempStats);
-  };
-  
   export const gernerateAword = (
     shows: Array<string>,
     hints: Array<string>,
@@ -54,7 +44,7 @@ export enum ActionType {
     setPlayerWinTurn(playerWin);
   };
   
-  export const resetGame = (setNewGame: Function, setModalOpen: Function) => {
+  export const resetAfterWin = (setNewGame: Function, setModalOpen: Function) => {
     setNewGame(true);
     setModalOpen(false);
   };

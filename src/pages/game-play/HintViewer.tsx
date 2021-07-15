@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GameModal } from "../../commonComponents/StyledComponents";
+import { PopUpWindow } from "../../commonComponents/StyledComponents";
 
 const HintViewer = ({
   relatedHint,
@@ -9,13 +9,13 @@ const HintViewer = ({
   handleClick: Function;
 }) => {
   return (
-    <GameModal flexDirection={"column"}>
+    <PopUpWindow flexDirection={"column"}>
       <StyledTitle> hint:</StyledTitle>
       <StyledParagraph>{relatedHint}</StyledParagraph>
       <StyledModalButton onClick={() => handleClick()}>
         Got it, Thanks
       </StyledModalButton>
-    </GameModal>
+    </PopUpWindow>
   );
 };
 

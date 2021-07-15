@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { StyledButton } from "../../commonComponents/StyledComponents";
+import { DisabledButton, FlexBox, InvalidSign, StyledButton } from "../../commonComponents/StyledComponents";
 
 const UserLetterGuess = ({
   onGuessSubmit,
@@ -10,7 +10,14 @@ const UserLetterGuess = ({
   const [userLetter, setUserLetter] = useState("");
 
   return (
-    <LetterGuessContainer>
+    <FlexBox
+    flexDirection={"row"}
+    justifyContent ={"space-between"}
+    alignItems={"center"}
+    height ={"100%"}
+    width ={"50%"}
+
+    >
       <StyledInput
         value={userLetter}
         onChange={(e) => setUserLetter(e.target.value)}
@@ -24,6 +31,7 @@ const UserLetterGuess = ({
           }}
           disabled
         >
+          <InvalidSign>You can guess only one charcter at a time</InvalidSign>
           Send my guess
         </DisabledButton>
       ) : (
@@ -33,46 +41,25 @@ const UserLetterGuess = ({
             setUserLetter("");
           }}
         >
-
           Send my guess
         </StyledButton>
       )}
-    </LetterGuessContainer>
+    </FlexBox>
   );
 };
 
 export default UserLetterGuess;
 
-const LetterGuessContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  width: 50%;
-`;
 const StyledInput = styled.input`
   height: 30%;
   width: 40%;
   background: lightblue;
   font-size: 33px;
   text-align: center;
+  @media (max-width: 900px) {
+    height: 30%;
+    width: 80%;
+    font-size: 22px;
+  }
 `;
 
-const DisabledButton = styled.button`
-    background: #6b6b6b;
-    color: #b3bec2;
-    font-size: 22px;
-    border-radius: 1rem;
-    cursor: pointer;
-    height: 40%;
-    width: 40%;
-    @media (max-width: 900px) {
-    font-size: 10px;
-    border-radius: 10px;
-    height: 30%;
-    width: 50%;
-    }
-    @media (min-width: 900px) {
-    font-size: 18px;
-    }
-`

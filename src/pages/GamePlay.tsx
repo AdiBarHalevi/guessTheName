@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import ChosenMovie from "./game-play/ChosenNameShow";
 
 import UserLetterGuess from "./game-play/UserLetterGuess";
 import CreditViewer from "./game-play/CreditViewer";
 import Stats from "./game-play/Stats";
-import EndGameModal from "./EndGameModal";
+import EndGameWindow from "./EndGameWindow";
 
-import styled from "styled-components";
+
 import HintViewer from "./game-play/HintViewer";
-import { StyledButton } from "../commonComponents/StyledComponents";
-import { ActionType, changeStats, checkIfSolved, gernerateAword, resetGame, turnEnd } from "../utils/gamePlayUtils";
+import { DisabledButton, FlexBox, MainContent, StyledButton, StyledPage, StyledPageHeader, UpperContainer } from "../commonComponents/StyledComponents";
+import { ActionType, checkIfSolved, gernerateAword, resetAfterWin, turnEnd } from "../utils/gamePlayUtils";
 
 
 const Gameplay = ({
@@ -28,7 +27,7 @@ const Gameplay = ({
   const [hintModalOpen, setHintModalOpen] = useState(false);
   const [playerWinTurn, setPlayerWinTurn] = useState(false);
   const [creditPoints, setCreditPoints] = useState<number>(3);
-  const [statsObj, setStatsObj] = useState({ correct: 0, wrong: 0, help: 0 });
+  const [statsObj, setStatsObj] = useState<{correct: number, wrong:number, help: number}>({ correct: 0, wrong: 0, help: 0 });
   const [newGame, setNewGame] = useState(true);
 
   useEffect(() => {
@@ -38,7 +37,9 @@ const Gameplay = ({
 
   const onHintRequest = () => {
     setHintModalOpen(!hintModalOpen)
-    changeStats(statsObj, ActionType.HELP, setStatsObj);
+    const tempStats = { ...statsObj };
+    tempStats[ActionType.HELP]++;
+    setStatsObj(tempStats);
   };
 
   const onLetterGuess = (letter: string) => {
@@ -52,12 +53,13 @@ const Gameplay = ({
       const showNameWithGuess = showName?.map((letterObj) => {
         if (lowerCaseUserGuess === letterObj.letter.toLowerCase()){
           return { letter: letterObj.letter, isVisible: true };
-
         }
         return { letter: letterObj.letter, isVisible: letterObj.isVisible };
       });
 
-      changeStats(statsObj, ActionType.CORRECT, setStatsObj);
+      const tempStats = { ...statsObj };
+      tempStats[ActionType.CORRECT]++;
+      setStatsObj(tempStats);
       const coveredLettersLeft = checkIfSolved(showNameWithGuess);
 
       if (!coveredLettersLeft){
@@ -66,7 +68,9 @@ const Gameplay = ({
 
       setShowName(showNameWithGuess);
     } else {
-      changeStats(statsObj, ActionType.WRONG, setStatsObj);
+      const tempStats = { ...statsObj };
+      tempStats[ActionType.WRONG]++;
+      setStatsObj(tempStats);
       const deductedCredit = creditPoints - 1;
 
       if (deductedCredit === 0){
@@ -76,15 +80,27 @@ const Gameplay = ({
     }
   };
 
+
   return (
-    <StyledPage>
+    <StyledPage>  
       <UpperContainer>
         <Stats statsObj={statsObj} />
-        <CreditAndHintsContainer>
+        <FlexBox
+          flexDirection={"column"}
+          justifyContent ={"center"}
+          alignItems={"center"}
+          height ={"58%"}
+          width ={"50%"}
+        >
           <CreditViewer creditPoints={creditPoints} />
 
-          <StyledButton onClick={onHintRequest}> Hint </StyledButton>
-        </CreditAndHintsContainer>
+          {/* some of the API's value's do not have a description */}
+          {relatedHint.length>1?
+            <StyledButton onClick={onHintRequest}> Hint </StyledButton>:
+            <DisabledButton>this show has no hint, sorry!</DisabledButton>
+          
+        }
+        </FlexBox>
 
         {hintModalOpen && (
           <HintViewer
@@ -97,20 +113,26 @@ const Gameplay = ({
       </UpperContainer>
 
       <MainContent>
-        <GameContainer>
-          <StyledTitle>guess the word</StyledTitle>
+        <FlexBox
+          flexDirection={"column"}
+          justifyContent ={"center"}
+          alignItems={"center"}
+          height ={"90%"}
+          width ={"95%"}
+        >
+          <StyledPageHeader>guess the word</StyledPageHeader>
 
           <ChosenMovie showName={showName} />
 
           <UserLetterGuess
             onGuessSubmit={onLetterGuess}
           />
-        </GameContainer>
+        </FlexBox>
       </MainContent>
       {endGamemodalOpen && (
-        <EndGameModal
+        <EndGameWindow
           endGameStatus={playerWinTurn}
-          resetGame={() => resetGame(setNewGame, setEndGameModelOpen)}
+          contiuePlaying={() => resetAfterWin(setNewGame, setEndGameModelOpen)}
         />
       )}
     </StyledPage>
@@ -118,74 +140,3 @@ const Gameplay = ({
 };
 
 export default Gameplay;
-
-const StyledPage = styled.div`
-  height: 100%;
-  width: 100%;
-  background: #b3bec2;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
-  font-family: "Yomogi", cursive, Arial, Helvetica, sans-serif;
-  position: relative;
-
-  @media (max-width: 900px) {
-    font-size: 28px;
-  }
-`;
-
-const UpperContainer = styled.header`
-  width: 100%;
-  height: 40%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  @media (max-width: 800px) {
-    height: 50%;
-  }
-`;
-const MainContent = styled.div`
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-
-const GameContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 90%;
-  width: 95%;
-`;
-
-const StyledTitle = styled.p`
-  font-size: 44px;
-  font-weight: 600;
-  display: block;
-  
-  @media (max-width: 800px) {
-    font-size: 18px;
-  }
-`;
-const CreditAndHintsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 58%;
-  width: 50%;
-
-  @media (max-width: 800px) {
-    height: 65%;
-    justify-content: center;
-    width: 30%;
-  }
-`;
