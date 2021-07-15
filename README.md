@@ -23,6 +23,7 @@ How to install ?
 
 git clone https://github.com/AdiBarHalevi/guessTheName.git
 
-npm install
+yarn
 
-npm start
+yarn start
+
