@@ -1,46 +1,29 @@
-# Getting Started with Create React App
+Guess the TV Show.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+this Project is a front end only project.
 
-## Available Scripts
+In this project i used the API :https://developers.themoviedb.org/3/tv/get-top-rated-tv in order to fecth popular TV shows .
 
-In the project directory, you can run:
+The Libraries that i used in this project are: React Router Dom, Styled Components, TypeScript and Axios.
 
-### `yarn start`
+the site has 3 pages:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1- Main
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![home](https://user-images.githubusercontent.com/77383329/125804210-a1929df9-4a74-41cc-8d64-243818de5aa6.png)
 
-### `yarn test`
+2- gamePlay holds the entire game
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![game](https://user-images.githubusercontent.com/77383329/125803976-936c2ffb-bd8b-456c-8f06-53024e0a896b.png)
 
-### `yarn build`
+3- explain provides explanation
+![explain](https://user-images.githubusercontent.com/77383329/125804452-7e004ffb-3866-42af-aaef-aebc972736ac.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+How to install ?
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+git clone https://github.com/AdiBarHalevi/guessTheName.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm install
 
-### `yarn eject`
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
