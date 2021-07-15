@@ -10,7 +10,6 @@ const ChosenMovie = ({
   }
   return (
     <WordContainer>
-      {console.log(showName)}
       {showName.map((letterObj: { letter: string; isVisible: boolean }, i) => {
         const { letter, isVisible } = letterObj;
         if (letter === " ") {
@@ -33,6 +32,7 @@ const StyledDash = styled.span`
   width: 5rem;
   height: 3.75rem;
   margin: 0 5px 0 5px;
+
   @media (max-width: 900px) {
     font-size: 22px;
   }
@@ -52,8 +52,10 @@ const WordContainer = styled.div`
   height: 50%;
   width: 90%;
   padding: 10px;
-  overflow: auto;
-  @media (max-width: 900px) {
+  
+  
+  @media (max-width: 1500px) {
     justify-content: unset;
+    overflow: scroll;
   }
 `;

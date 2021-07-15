@@ -36,6 +36,7 @@ const StyledParagraph = styled.p`
 const StyledTitle = styled.span`
   font-size: 44px;
   font-weight: 600;
+  
   @media (max-width: 900px) {
     font-size: 28px;
   }
@@ -49,6 +50,7 @@ const StyledModalButton = styled.button`
   cursor: pointer;
   height: 10%;
   width: 15%;
+
   @media (max-width: 900px) {
     font-size: 10px;
     border-radius: 5%;

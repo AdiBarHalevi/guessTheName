@@ -10,7 +10,7 @@ interface Props {
 
 const Stats: React.FC<Props> = ({ statsObj }) => {
   return (
-    <>
+    <ScoreBoard>
       <table>
         <tbody>
           <tr>
@@ -27,7 +27,7 @@ const Stats: React.FC<Props> = ({ statsObj }) => {
           </tr>
         </tbody>
       </table>
-    </>
+    </ScoreBoard>
   );
 };
 
@@ -41,7 +41,14 @@ const TableHader = styled.th`
 `;
 const TableCell = styled.td`
   font-size: 33px;
+  
   @media (max-width: 800px) {
     font-size: 14px;
   }
+`;
+
+const ScoreBoard = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
 `;

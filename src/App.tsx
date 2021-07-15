@@ -1,9 +1,7 @@
-import "./App.css";
 import Home from "./pages/Home";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import GamePlayApi from "./pages/game-play/GamePlayApi";
-import styled from "styled-components";
 import Layout from "./components/Layout";
 
 function App() {

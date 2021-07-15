@@ -2,8 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import { StyledButton } from "../../commonComponents/StyledComponents";
 
-const RemoveLetter = (string: string) => string.slice(0, 1);
-
 const UserLetterGuess = ({
   onGuessSubmit,
 }: {
