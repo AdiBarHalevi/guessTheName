@@ -11,7 +11,6 @@ const ChosenMovie = ({
   return (
     <WordContainer>
       {showName.map((letterObj: { letter: string; isVisible: boolean }, i) => {
-        
         const { letter, isVisible } = letterObj;
         if (letter === " ") {
           return <StyledSpace key={i} />;
@@ -50,12 +49,13 @@ const WordContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   max-width: 100%;
-  height: 80%;
+  height: 100%;
   padding: 10px;
-  overflow: auto;
-  
+  overflow-x: auto;
+  overflow-y: hidden;
+
   @media (max-width: 1500px) {
     justify-content: unset;
     overflow: scroll;

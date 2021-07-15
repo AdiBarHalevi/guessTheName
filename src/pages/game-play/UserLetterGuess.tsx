@@ -1,6 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { DisabledButton, FlexBox, InvalidSign, StyledButton } from "../../commonComponents/StyledComponents";
+import {
+  DisabledButton,
+  FlexBox,
+  InvalidSign,
+  StyledButton,
+} from "../../commonComponents/StyledComponents";
 
 const UserLetterGuess = ({
   onGuessSubmit,
@@ -11,12 +16,11 @@ const UserLetterGuess = ({
 
   return (
     <FlexBox
-    flexDirection={"row"}
-    justifyContent ={"space-between"}
-    alignItems={"center"}
-    height ={"100%"}
-    width ={"50%"}
-
+      flexDirection={"row"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      height={"100%"}
+      width={"50%"}
     >
       <StyledInput
         value={userLetter}
@@ -32,7 +36,7 @@ const UserLetterGuess = ({
           disabled
         >
           <InvalidSign>You can guess only one charcter at a time</InvalidSign>
-          Send my guess
+          Check the guess
         </DisabledButton>
       ) : (
         <StyledButton
@@ -41,7 +45,7 @@ const UserLetterGuess = ({
             setUserLetter("");
           }}
         >
-          Send my guess
+          Check the guess
         </StyledButton>
       )}
     </FlexBox>
@@ -62,4 +66,3 @@ const StyledInput = styled.input`
     font-size: 22px;
   }
 `;
-

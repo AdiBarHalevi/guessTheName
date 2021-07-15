@@ -36,7 +36,7 @@ const StyledParagraph = styled.p`
 const StyledTitle = styled.span`
   font-size: 44px;
   font-weight: 600;
-  
+
   @media (max-width: 900px) {
     font-size: 28px;
   }

@@ -8,9 +8,7 @@ const EndGameWindow = ({
 }: {
   endGameStatus: boolean;
   contiuePlaying: Function;
-
 }) => {
-
   const resetToContinue = () => {
     contiuePlaying();
   };
@@ -19,7 +17,7 @@ const EndGameWindow = ({
     <>
       <PopUpWindow flexDirection="row">
         {endGameStatus ? (
-          <SucessFullTurn handleClick={()=>resetToContinue} />
+          <SucessFullTurn handleClick={() => resetToContinue()} />
         ) : (
           <GameOver />
         )}

@@ -2,50 +2,43 @@ import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import oldWood from "../img/oldwood.jpeg";
 
+const Layout = ({ children }: { children: JSX.Element }) => (
+  <Background>
+    <OuterTVBorder>
+      <InnerBorder>{children}</InnerBorder>
 
+      <SideDecorations>
+        <TVButton>
+          <ButtonController />
+        </TVButton>
 
-const Layout = ({ children }: { children: JSX.Element }) => 
-   (
-    <Background>
-      <OuterTVBorder>
-        <InnerBorder>
-          {children}
-        </InnerBorder>
+        <LinksContainer>
+          <StyledTVLink to={"/"} top={"40%"}>
+            Home
+          </StyledTVLink>
+          <StyledTVLink to={"/gamePlay"} top={"50%"}>
+            Play
+          </StyledTVLink>
+          <StyledTVLink to={"/explain"} top={"40%"}>
+            Instructions
+          </StyledTVLink>
+        </LinksContainer>
 
-        <SideDecorations>
-          <TVButton>
-            <ButtonController />
-          </TVButton>
-
-          <LinksContainer>
-              <StyledTVLink to={'/'} top ={'40%'}>
-                Home
-            </StyledTVLink>
-              <StyledTVLink to={'/gamePlay'} top ={'50%'}>
-                Play
-            </StyledTVLink>
-              <StyledTVLink to={'/explain'} top ={'40%'}>
-                Instructions
-            </StyledTVLink>
-          </LinksContainer>
-
-          <SoundAdjusters>
-            <SingelAdujuster>
-              <AdjusterPin  top={`10px`} />
-            </SingelAdujuster>
-            <SingelAdujuster>
-              <AdjusterPin  top={`90px`} />
-            </SingelAdujuster>
-            <SingelAdujuster>
-              <AdjusterPin top={`50px`} />
-            </SingelAdujuster>
-          </SoundAdjusters>
-        </SideDecorations>
-      </OuterTVBorder>
-    </Background>
-  );
-;
-
+        <SoundAdjusters>
+          <SingelAdujuster>
+            <AdjusterPin top={`10px`} />
+          </SingelAdujuster>
+          <SingelAdujuster>
+            <AdjusterPin top={`90px`} />
+          </SingelAdujuster>
+          <SingelAdujuster>
+            <AdjusterPin top={`50px`} />
+          </SingelAdujuster>
+        </SoundAdjusters>
+      </SideDecorations>
+    </OuterTVBorder>
+  </Background>
+);
 export default Layout;
 
 const Background = styled.div`
@@ -63,10 +56,10 @@ const OuterTVBorder = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius:1rem;
-  border:5px solid black;
+  border-radius: 1rem;
+  border: 5px solid black;
   @media (max-width: 800px) {
-    flex-direction:column;
+    flex-direction: column;
   }
 `;
 
@@ -92,12 +85,11 @@ const TVButton = styled.div`
   border-radius: 3rem;
   position: relative;
   z-index: 0;
-  box-shadow:0px 0px 0px 5px rgba(0,0,0,0.51);
+  box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.51);
   transform: rotate(60deg);
   @media (max-width: 800px) {
     display: none;
- }
-
+  }
 `;
 
 const rotateController = keyframes`
@@ -118,9 +110,6 @@ const ButtonController = styled.div`
   animation-iteration-count: infinite;
 `;
 
-
-
-
 const SideDecorations = styled.div`
   border: black 10px solid;
   display: flex;
@@ -133,23 +122,21 @@ const SideDecorations = styled.div`
   @media (max-width: 800px) {
     width: 90%;
     height: 8%;
-    background:none;
-    border:none;
-
+    background: none;
+    border: none;
   }
-
 `;
 
 const SoundAdjusters = styled.div`
   display: flex;
   width: 80%;
-  height:30%;
+  height: 30%;
   justify-content: space-around;
-  background:#E6DBCC;
-  align-items:center;
-  box-shadow:0px 0px 0px 5px rgba(0,0,0,0.51);
+  background: #e6dbcc;
+  align-items: center;
+  box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.51);
   @media (max-width: 800px) {
-     display: none;
+    display: none;
   }
 `;
 
@@ -176,41 +163,36 @@ const AdjusterPin = styled(`div`)<{ top: string }>`
   animation-name: ${moveAdjuster};
   animation-duration: 12s;
   animation-iteration-count: infinite;
-
 `;
 
-
-
 const LinksContainer = styled.div`
-  position:rleative;
+  position: rleative;
   height: 30%;
   width: 90%;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-around;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   @media (max-width: 800px) {
-    flex-direction:row;
- }
-`
+    flex-direction: row;
+  }
+`;
 
 const StyledTVLink = styled(Link)<{ top: string }>`
-    text-decoration:none;
-    background:red;
-    height: 20%;
-    font-size:1.5rem;
-    color:white;
-    display:felx;
-    align-items:center;
-    justify-content:center;
-    border:3px solid black;
-    box-shadow:0px 0px 0px 2px rgba(0,0,0,0.51);
-    @media(max-width: 1100px) {
-      font-size: 1rem;
-      
-   }
-    @media (max-width: 800px) {
-      height: 250%;
-      font-size: 1.3rem;
-      
-   }
-    `
+  text-decoration: none;
+  background: red;
+  height: 20%;
+  font-size: 1.5rem;
+  color: white;
+  display: felx;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid black;
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.51);
+  @media (max-width: 1100px) {
+    font-size: 1rem;
+  }
+  @media (max-width: 800px) {
+    height: 250%;
+    font-size: 1.3rem;
+  }
+`;

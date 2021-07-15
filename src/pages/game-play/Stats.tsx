@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { FlexBox } from "../../commonComponents/StyledComponents";
+import {
+  PopUpWindow,
+  StyledModalButton,
+} from "../../commonComponents/StyledComponents";
 
 interface Props {
   statsObj: {
@@ -7,12 +10,12 @@ interface Props {
     wrong: number;
     help: number;
   };
+  handleClick: Function;
 }
 
-
-const Stats: React.FC<Props> = ({ statsObj }) => {
+const Stats: React.FC<Props> = ({ statsObj, handleClick }) => {
   return (
-    <FlexBox flexDirection={'column'} width={'60%'} >
+    <PopUpWindow flexDirection={"column"}>
       <table>
         <tbody>
           <tr>
@@ -29,7 +32,8 @@ const Stats: React.FC<Props> = ({ statsObj }) => {
           </tr>
         </tbody>
       </table>
-    </FlexBox>
+      <StyledModalButton onClick={() => handleClick()}>close</StyledModalButton>
+    </PopUpWindow>
   );
 };
 
@@ -44,9 +48,8 @@ const TableHader = styled.th`
 
 const TableCell = styled.td`
   font-size: 33px;
-  
+
   @media (max-width: 800px) {
     font-size: 14px;
   }
 `;
-

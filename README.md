@@ -26,4 +26,3 @@ git clone https://github.com/AdiBarHalevi/guessTheName.git
 npm install
 
 npm start
-

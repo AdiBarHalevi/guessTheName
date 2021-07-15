@@ -1,15 +1,18 @@
-import { FlexBox, PopUpHeader, StyledModalButton } from "../commonComponents/StyledComponents";
+import {
+  FlexBox,
+  PopUpHeader,
+  StyledModalButton,
+} from "../commonComponents/StyledComponents";
 
 const GameOver = () => {
   return (
-    <FlexBox flexDirection='column'>
+    <FlexBox flexDirection="column">
       <PopUpHeader>Game Over</PopUpHeader>
-        <StyledModalButton onClick={() => window.location.reload()}>
-          restart the game
-        </StyledModalButton>
+      <StyledModalButton onClick={() => window.location.reload()}>
+        restart the game
+      </StyledModalButton>
     </FlexBox>
   );
 };
 
 export default GameOver;
-
