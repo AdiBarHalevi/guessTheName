@@ -4,11 +4,11 @@ import {
   StyledModalButton,
 } from "../commonComponents/StyledComponents";
 
-const GameOver = () => {
+const GameOver = ({handleClick}:{handleClick:Function}) => {
   return (
     <FlexBox flexDirection="column">
       <PopUpHeader>Game Over</PopUpHeader>
-      <StyledModalButton onClick={() => window.location.reload()}>
+      <StyledModalButton onClick={() => handleClick()}>
         restart the game
       </StyledModalButton>
     </FlexBox>

@@ -1,12 +1,6 @@
 import { getRandomArrayIndex } from "./utils";
 const englishLettersRegex = /[A-Za-z]/;
 
-export enum ActionType {
-  CORRECT = "correct",
-  WRONG = "wrong",
-  HELP = "help",
-}
-
 export const showNameToLettersObject = (
   showName: string
 ): Array<{ letter: string; isVisible: boolean }> => {

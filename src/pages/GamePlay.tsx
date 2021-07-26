@@ -17,21 +17,22 @@ import {
   UpperContainer,
 } from "../commonComponents/StyledComponents";
 import {
-  ActionType,
   checkIfSolved,
   gernerateAword,
   resetAfterWin,
   turnEnd,
 } from "../utils/gamePlayUtils";
+import { ActionType, GamePlayProp, StatisticsType } from "../Types";
+
 
 const Gameplay = ({
   shows,
   hints,
   statistics,
 }: {
-  shows: Array<string>;
-  hints: Array<string>;
-  statistics?: { correct: number; wrong: number; help: number };
+  shows: GamePlayProp;
+  hints: GamePlayProp;
+  statistics?:StatisticsType;
 }) => {
   const [showName, setShowName] = useState<
     Array<{ letter: string; isVisible: boolean }>
@@ -42,11 +43,7 @@ const Gameplay = ({
   const [statsModalOpen, setStatsModalOpen] = useState(false);
   const [playerWinTurn, setPlayerWinTurn] = useState(false);
   const [creditPoints, setCreditPoints] = useState<number>(3);
-  const [statsObj, setStatsObj] = useState<{
-    correct: number;
-    wrong: number;
-    help: number;
-  }>(statistics || { correct: 0, wrong: 0, help: 0 });
+  const [statsObj, setStatsObj] = useState<StatisticsType>(statistics || { correct: 0, wrong: 0, help: 0 });
   const [newGame, setNewGame] = useState(true);
 
   const updateStatistics = (action: ActionType) => {
@@ -65,6 +62,7 @@ const Gameplay = ({
     setHintModalOpen(!hintModalOpen);
     updateStatistics(ActionType.HELP);
   };
+  
 
   const onLetterGuess = (letter: string) => {
     const lowerCaseUserGuess = letter.toLowerCase();
@@ -151,6 +149,11 @@ const Gameplay = ({
         <EndGameWindow
           endGameStatus={playerWinTurn}
           contiuePlaying={() => resetAfterWin(setNewGame, setEndGameModelOpen)}
+          resetAfterLoss = {()=>{
+            setCreditPoints(3)
+            setNewGame(true)
+            setEndGameModelOpen(false)
+          }}
         />
       )}
     </StyledPage>

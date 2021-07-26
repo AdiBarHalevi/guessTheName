@@ -3,13 +3,10 @@ import {
   PopUpWindow,
   StyledModalButton,
 } from "../../commonComponents/StyledComponents";
+import { StatisticsType } from "../../Types";
 
 interface Props {
-  statsObj: {
-    correct: number;
-    wrong: number;
-    help: number;
-  };
+  statsObj:StatisticsType;
   handleClick: Function;
 }
 

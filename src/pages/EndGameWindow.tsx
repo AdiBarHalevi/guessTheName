@@ -1,14 +1,13 @@
 import { PopUpWindow } from "../commonComponents/StyledComponents";
+import { endGameProps } from "../Types";
 import GameOver from "./GameOver";
 import SucessFullTurn from "./SucessFullTurn";
 
 const EndGameWindow = ({
   endGameStatus,
   contiuePlaying,
-}: {
-  endGameStatus: boolean;
-  contiuePlaying: Function;
-}) => {
+  resetAfterLoss
+}: endGameProps) => {
   const resetToContinue = () => {
     contiuePlaying();
   };
@@ -19,7 +18,7 @@ const EndGameWindow = ({
         {endGameStatus ? (
           <SucessFullTurn handleClick={() => resetToContinue()} />
         ) : (
-          <GameOver />
+          <GameOver handleClick={()=>resetAfterLoss()}/>
         )}
       </PopUpWindow>
     </>

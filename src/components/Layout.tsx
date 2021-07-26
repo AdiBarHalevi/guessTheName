@@ -1,8 +1,9 @@
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import oldWood from "../img/oldwood.jpeg";
 
-const Layout = ({ children }: { children: JSX.Element }) => (
+const Layout = ({ children }: { children: ReactNode }) => (
   <Background>
     <OuterTVBorder>
       <InnerBorder>{children}</InnerBorder>

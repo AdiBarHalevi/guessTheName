@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { PopUpWindow } from "../../commonComponents/StyledComponents";
+import { HintViewerInterFace } from "../../Types";
+
+
 
 const HintViewer = ({
   relatedHint,
   handleClick,
-}: {
-  relatedHint: string;
-  handleClick: Function;
-}) => {
+}: HintViewerInterFace) => {
   return (
     <PopUpWindow flexDirection={"column"}>
       <StyledTitle> hint:</StyledTitle>

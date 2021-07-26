@@ -1,16 +1,18 @@
 import styled from "styled-components";
+import { LetterObjType, showNameType } from "../../Types";
+
+
+
 
 const ChosenMovie = ({
   showName,
-}: {
-  showName?: Array<{ letter: string; isVisible: boolean }>;
-}) => {
+}: {showName?:showNameType}) => {
   if (!showName) {
     return <div></div>;
   }
   return (
     <WordContainer>
-      {showName.map((letterObj: { letter: string; isVisible: boolean }, i) => {
+      {showName.map((letterObj: LetterObjType, i) => {
         const { letter, isVisible } = letterObj;
         if (letter === " ") {
           return <StyledSpace key={i} />;
